@@ -55,21 +55,25 @@ Step 4: Test project
 > * In the request collection you will see 5 add/transaction requests, 1 spend/rewards request and 1 get/balance request. 
 >
 > * Send requests:
+>
 > **add/transaction request:** Adds a transaction into the database.
+>
 > Request Body:
+>
 ```
 { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
 ```
 >
->
 > **spend/rewards request:** This will deduct 5000 points.
+>
 > Request Body:
+>
 ```
 { "points": 5000 }
 ```
 >
-
 > Response Body:
+>
 ```
 {
     "UNILEVER": -200,
@@ -79,7 +83,9 @@ Step 4: Test project
 ```
 >
 > **get/balances request:** It will show payers and their balances.
+>
 > Response Body:
+>
 ```
 {
     "UNILEVER": 0,
