@@ -64,6 +64,7 @@ Request Body:
 ```
 
 2) **spend/rewards request:** This will deduct 5000 points.
+
 Request Body:
 ```
 { "points": 5000 }
@@ -79,6 +80,7 @@ Response Body:
 ```
 
 3) **get/balances request:** It will show payers and their balances.
+
 Response Body:
 ```
 {
