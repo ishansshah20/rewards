@@ -8,7 +8,7 @@
 >
 > **Database:** [H2](https://en.wikipedia.org/wiki/H2_(DBMS))
 >
-> Here I have used H2 database because it was not expected to use any durable data store. Storing transactions in memory was acceptable for the exercise and H2 database is used exactly for that.
+> Here I have used H2 database because using a durable data store was not a requirement. So I am storing transactions in memory using H2.
 >
 > **Tools:** IntelliJ, Postman
 
@@ -54,13 +54,43 @@ Step 4: Test project
 > 
 > * In the request collection you will see 5 add/transaction requests, 1 spend/rewards request and 1 get/balance request. 
 >
-> * First send 5 add/transaction requests. You can change the content of the request in request body. It will return "success" message.
-> 
-> * Then send spend/rewards request. This will deduct 5000 points according to the logic discussed. It will return "transaction saved"
->
-> * At last to see the updated balances of payers send get/balances request. It will show payers and their balances in response.
+> * Send requests in this chronology:
 
-## And we are done!
+1) **add/transaction request:** Adds a transaction into the database.
+
+      Request Body:
+      ```
+        { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
+      ```
+
+2) **spend/rewards request:** This will deduct 5000 points.
+
+      Request Body:
+      ```
+        { "points": 5000 }
+      ```
+
+      Response Body:
+      ```
+        {
+            "UNILEVER": -200,
+            "MILLER COORS": -4700,
+            "DANNON": -100
+        }
+      ```
+
+3) **get/balances request:** It will show payers and their balances.
+
+      Response Body:
+      ```
+        {
+            "UNILEVER": 0,
+            "MILLER COORS": 5300,
+            "DANNON": 1000
+        }
+      ```
+
+## Finished!
 
 
 
