@@ -10,7 +10,7 @@
 		{
 			"name": "localhost:8080/get/balance",
 			"request": {
-				"url": "",
+				"url": "localhost:8080/get/balance",
 				"method": "GET",
 				"header": [],
 				"body": {},
