@@ -64,6 +64,7 @@ Step 4: Test project
 { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
 ```
 >
+
 > **spend/rewards request:** This will deduct 5000 points.
 >
 > Request Body:
@@ -82,6 +83,7 @@ Step 4: Test project
 }
 ```
 >
+
 > **get/balances request:** It will show payers and their balances.
 >
 > Response Body:
