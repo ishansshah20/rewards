@@ -58,37 +58,37 @@ Step 4: Test project
 
 1) **add/transaction request:** Adds a transaction into the database.
 
-    Request Body:
-    ```
-    { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
-    ```
+        Request Body:
+        ```
+        { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
+        ```
 
 2) **spend/rewards request:** This will deduct 5000 points.
 
-    Request Body:
-    ```
-    { "points": 5000 }
-    ```
+        Request Body:
+        ```
+        { "points": 5000 }
+        ```
 
-    Response Body:
-    ```
-    {
-        "UNILEVER": -200,
-        "MILLER COORS": -4700,
-        "DANNON": -100
-    }
-    ```
+        Response Body:
+        ```
+        {
+            "UNILEVER": -200,
+            "MILLER COORS": -4700,
+            "DANNON": -100
+        }
+        ```
 
 3) **get/balances request:** It will show payers and their balances.
 
-    Response Body:
-    ```
-    {
-        "UNILEVER": 0,
-        "MILLER COORS": 5300,
-        "DANNON": 1000
-    }
-    ```
+        Response Body:
+        ```
+        {
+            "UNILEVER": 0,
+            "MILLER COORS": 5300,
+            "DANNON": 1000
+        }
+        ```
 
 ## Finished!
 
