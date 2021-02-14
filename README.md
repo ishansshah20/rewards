@@ -1,4 +1,4 @@
-# Fetch Rewards
+# Fetch Rewards Assessment.
 
 ## Technologies Used
 
@@ -7,6 +7,7 @@
 > Framework: [Spring Boot](https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm)
 >
 > Database: [H2](https://en.wikipedia.org/wiki/H2_(DBMS))
+> Here I have used H2 database because it was not expected to use any durable data store. Storing transactions in memory was acceptable for the exercise and H2 database is used exactly for that.
 >
 > Tools: IntelliJ, Postman
 
@@ -36,7 +37,22 @@
 > 8) Open IntelliJ. On top click on File->Open. Select the pom.xml in the project folder and select add as project. This will add project into your IntelliJ IDE.
 For detailed tutorial [click here](https://vaadin.com/learn/tutorials/modern-web-apps-with-spring-boot-and-vaadin/importing-running-and-debugging-a-java-maven-project-in-intellij-idea)
 > 
-> 9) Click on the play button on top. It will start your project. Generally the project starts at localhost:8080  but in case it does not, got your console and see last second line it will show the port at which your porject is running.
+> 9) Click on the play button on top. It will start your project. Generally the project starts at localhost:8080  but in case it does not, go to your console and see last second line it will show the port at which your porject is running.
+>
+> 10) Now to check our end points(APIs/Services) we would need a postman. Its a tool that will simulate various types of request sent to our webservice. For more details about postman [click here](https://www.postman.com/api-platform/).
+>
+11) Open postman and click import on the top. Select Fetch Rewards.postman_collection from your project folder. 
+>
+12) In the request collection you will see 5 add/transaction requests, 1 spend/rewards request and 1 get/balance request. 
+>
+13) First send 5 add/transaction requests. You can change the content of the request in request body. It will return "success" message.
+> 
+14) Then send spend/rewards request. This will deduct 5000 points according to the logic discussed. It will return "transaction saved"
+>
+15) At last to see the updated balances of payers send get/balances request. It will show payers and their balances in response.
+
+And we are done!
+
 
 
 
