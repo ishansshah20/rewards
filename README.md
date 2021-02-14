@@ -54,13 +54,42 @@ Step 4: Test project
 > 
 > * In the request collection you will see 5 add/transaction requests, 1 spend/rewards request and 1 get/balance request. 
 >
-> * First send 5 add/transaction requests. You can change the content of the request in request body. It will return "success" message.
-> 
-> * Then send spend/rewards request. This will deduct 5000 points according to the logic discussed. It will return "transaction saved"
+> * Send requests:
+> **add/transaction request:** Adds a transaction into the database.
+> Request Body:
+```
+{ "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
+```
 >
-> * At last to see the updated balances of payers send get/balances request. It will show payers and their balances in response.
+>
+> **spend/rewards request:** This will deduct 5000 points.
+> Request Body:
+```
+{ "points": 5000 }
+```
+>
 
-## And we are done!
+> Response Body:
+```
+{
+    "UNILEVER": -200,
+    "MILLER COORS": -4700,
+    "DANNON": -100
+}
+```
+>
+> **get/balances request:** It will show payers and their balances.
+> Response Body:
+```
+{
+    "UNILEVER": 0,
+    "MILLER COORS": 5300,
+    "DANNON": 1000
+}
+```
+>
+
+## Finished!
 
 
 
