@@ -8,7 +8,7 @@
 >
 > **Database:** [H2](https://en.wikipedia.org/wiki/H2_(DBMS))
 >
-> Here I have used H2 database because it was not expected to use any durable data store. Storing transactions in memory was acceptable for the exercise and H2 database is used exactly for that.
+> Here I have used H2 database because using a durable data store was not a requirement. So I am storing transactions in memory using H2.
 >
 > **Tools:** IntelliJ, Postman
 
@@ -63,7 +63,6 @@ Step 4: Test project
 ```
 { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
 ```
->
 
 > **spend/rewards request:** This will deduct 5000 points.
 >
@@ -82,7 +81,6 @@ Step 4: Test project
     "DANNON": -100
 }
 ```
->
 
 > **get/balances request:** It will show payers and their balances.
 >
@@ -95,7 +93,6 @@ Step 4: Test project
     "DANNON": 1000
 }
 ```
->
 
 ## Finished!
 
