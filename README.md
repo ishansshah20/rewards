@@ -12,7 +12,7 @@
 >
 > **Tools:** IntelliJ, Postman
 
-### Links to download the Tools
+## Links to download the Tools
 
 > [Java](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 >
@@ -20,15 +20,15 @@
 >
 > [Postman](https://www.postman.com/downloads/)
 
-### How to run the project
+## How to run the project
 
-## Step 1: Setup tools
+# Step 1: Setup tools
 > * Download Java, IntelliJ and Postman. Links are given above.
 >
 > * [Set up java](https://www.youtube.com/watch?v=1ZbHHLobt8A) in local machine. [Set up java in IntelliJ](https://www.youtube.com/watch?v=L7IZ6Ckujbw).
 > 
 
-## Step 2: Setup project
+# Step 2: Setup project
 > * Click on fork on top right corner. It will paste the project on your repository.
 >
 > * Now copy the path to your repository from your browser's address bar. 
@@ -43,11 +43,11 @@
 For detailed tutorial [click here](https://vaadin.com/learn/tutorials/modern-web-apps-with-spring-boot-and-vaadin/importing-running-and-debugging-a-java-maven-project-in-intellij-idea)
 > 
 
-## Step 3: Run project
+# Step 3: Run project
 > * Click on the play button on top. It will start your project. Generally the project starts at localhost:8080  but in case it does not, go to your console and see last second line it will show the port at which your porject is running.
 >
 
-## Step 4: Test project
+# Step 4: Test project
 > * Now to check our end points(APIs/Services) we would need a postman. Its a tool that will simulate various types of request sent to our webservice. For more details about postman [click here](https://www.postman.com/api-platform/).
 >
 > * Open postman and click import on the top. Select Fetch Rewards.postman_collection from your project folder. 
