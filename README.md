@@ -7,6 +7,7 @@
 > Framework: [Spring Boot](https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm)
 >
 > Database: [H2](https://en.wikipedia.org/wiki/H2_(DBMS))
+>
 > Here I have used H2 database because it was not expected to use any durable data store. Storing transactions in memory was acceptable for the exercise and H2 database is used exactly for that.
 >
 > Tools: IntelliJ, Postman
