@@ -54,9 +54,10 @@ Step 4: Test project
 > 
 > * In the request collection you will see 5 add/transaction requests, 1 spend/rewards request and 1 get/balance request. 
 >
-> * Send requests:
+> * Send requests in this chronology:
 >
-> **add/transaction request:** Adds a transaction into the database.
+
+1) **add/transaction request:** Adds a transaction into the database.
 >
 > Request Body:
 >
@@ -65,7 +66,7 @@ Step 4: Test project
 ```
 >
 
-> **spend/rewards request:** This will deduct 5000 points.
+2) **spend/rewards request:** This will deduct 5000 points.
 >
 > Request Body:
 >
@@ -84,7 +85,7 @@ Step 4: Test project
 ```
 >
 
-> **get/balances request:** It will show payers and their balances.
+3) **get/balances request:** It will show payers and their balances.
 >
 > Response Body:
 >
