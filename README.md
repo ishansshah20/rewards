@@ -56,14 +56,14 @@ Step 4: Test project
 >
 > * Send requests in this chronology:
 
-> 1) **add/transaction request:** Adds a transaction into the database.
+1) **add/transaction request:** Adds a transaction into the database.
 
     Request Body:
     ```
     { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
     ```
 
-> 2) **spend/rewards request:** This will deduct 5000 points.
+2) **spend/rewards request:** This will deduct 5000 points.
 
     Request Body:
     ```
@@ -79,7 +79,7 @@ Step 4: Test project
     }
     ```
 
-> 3) **get/balances request:** It will show payers and their balances.
+3) **get/balances request:** It will show payers and their balances.
 
     Response Body:
     ```
