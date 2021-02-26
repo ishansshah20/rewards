@@ -96,22 +96,26 @@ Step 4: Test project
 
       Response Body:
       ```
-       {
+      {
           "message": "Rewards spent!",
           "success": true,
           "error": "",
           "response": [
               {
-                  "points": 0,
+                  "points": -200,
                   "payer": "UNILEVER"
               },
               {
-                  "points": -300,
+                  "points": -4700,
+                  "payer": "MILLER COORS"
+              },
+              {
+                  "points": -100,
                   "payer": "DANNON"
               }
           ],
           "status": "OK"
-        }
+      }
       ```
 
 3) **get/balances request:** It will show payers and their balances.
