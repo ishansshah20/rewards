@@ -35,22 +35,14 @@
 
 ## How to run the project
 
-Step 1: Setup tools
+Step 1: Setting up the tools
 > * Download Java, IntelliJ and Postman. Links are given above.
 >
 > * [Set up java](https://www.youtube.com/watch?v=1ZbHHLobt8A) in local machine. [Set up java in IntelliJ](https://www.youtube.com/watch?v=L7IZ6Ckujbw).
 > 
 
-Step 2: Setup project
-> * Click on fork on top right corner. It will paste the project on your repository.
->
-> * Now copy the path to your repository from your browser's address bar. 
-> 
-> * On your local machine go to the directory where you want to set up your project.
->
-> * On your file explorer write 'cmd' in your address bar. It will open up a command prompt for that directory.
->
-> * In that command prompt write "git clone <copied web address in step 4)>". It will clone the project from your repository into your local machine.
+Step 2: Setting up the project
+> * Using "-git clone" clone the project into your local machine.
 >
 > * Open IntelliJ. On top click on File->Open. Select the pom.xml in the project folder and select add as project. This will add project into your IntelliJ IDE.
 For detailed tutorial [click here](https://vaadin.com/learn/tutorials/modern-web-apps-with-spring-boot-and-vaadin/importing-running-and-debugging-a-java-maven-project-in-intellij-idea)
@@ -63,48 +55,203 @@ Step 3: Run project
 Step 4: Test project
 > * Now to check our end points(APIs/Services) we would need a postman. Its a tool that will simulate various types of request sent to our webservice. For more details about postman [click here](https://www.postman.com/api-platform/).
 >
-> * Open postman and click import on the top. Select Fetch Rewards.postman_collection from your project folder. 
+> * Open postman and import Fetch Rewards.postman_collection from your project folder. 
 > 
-> * In the request collection you will see 5 add/transaction requests, 1 spend/rewards request and 1 get/balance request. 
+
+## Requests
+
+## 1) Add new transaction: 
+
+Adds a new transaction into the database.
+
+>**URL** : `localhost:8080/spend/rewards`
 >
-> * Send requests in this chronology:
+>**Method** : `POST`
+>
+>**Auth required** : NO
+>
+>**Permissions required** : None
+>
 
-1) **add/transaction request:** Adds a transaction into the database.
+**Data constraints**
 
-      Request Body:
-      ```
-        { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
-      ```
+Provide name of Payer, points we want to add for that payer and the timestamp.
 
-2) **spend/rewards request:** This will deduct 5000 points.
+```json
+{ 
+"payer": ["Name of the payer"], 
+"points": ["Points to add"], 
+"timestamp": ["Time stamp in format YYYY-MM-DDTHH:MM:SSZ"] 
+}
+```
 
-      Request Body:
-      ```
-        { "points": 5000 }
-      ```
+**Data example** All fields must be sent.
 
-      Response Body:
-      ```
+```json
+{ 
+"payer": "DANNON",
+"points": 300,
+"timestamp": "2020-10-31T10:00:00Z"
+}
+```
+   
+**Success Response**
+
+>**Condition** : If transaction is added and an transaction didn't exist for this User.
+>
+>**Code** : `201 CREATED`
+>
+>**Content example**
+
+```json
+ {
+"message": "Transaction Saved!",
+"success": true,
+"error": "",
+"response": [
+  {
+      "tid": "27a1141e-b8c1-4e0f-aba8-8ff1935c604a",
+      "payer": "MILLER COORS",
+      "points": 10000,
+      "timestamp": "2020-11-01T14:00:00.000+00:00",
+      "processed": false
+  }
+],
+"status": "CREATED"
+}
+```
+
+**Error Response**
+
+>**Condition** : If transaction is not saved internally
+>
+>**Code** : `400 BAD REQUEST`
+>
+>**Content example** :
+
+```json
+{
+    "message": "Error saving the transaction",
+    "success": false,
+    "error": "Internal error",
+    "response": [
+       {
+         "tid": "27a1141e-b8c1-4e0f-aba8-8ff1935c604a",
+         "payer": "MILLER COORS",
+         "points": 10000,
+         "timestamp": "2020-11-01T14:00:00.000+00:00",
+         "processed": false
+       }
+   ],
+    "status": "BAD_REQUEST"
+}
+```
+
+## 2) Spend the points
+
+Spend the points according to the rules
+
+>**URL** : `localhost:8080/spend/rewards`
+>
+>**Method** : `POST`
+>
+>**Auth required** : NO
+>
+>**Permissions required** : None
+
+**Data constraints**
+
+```json
+{
+    "points": "[points to spend]",
+}
+```
+
+**Data examples**
+
+```json
+{
+    "points": 5000
+}
+```
+
+**Success Responses**
+>
+>**Condition** : Data provided is valid and User is Authenticated.
+>
+>**Code** : `200 OK`
+>
+>**Content example** : Response will reflect back the information on the points spent from payers. 
+
+```json
+{
+    "message": "Rewards spent!",
+    "success": true,
+    "error": "",
+    "response": [
         {
-            "UNILEVER": -200,
-            "MILLER COORS": -4700,
-            "DANNON": -100
-        }
-      ```
-
-3) **get/balances request:** It will show payers and their balances.
-
-      Response Body:
-      ```
+            "points": -200,
+            "payer": "UNILEVER"
+        },
         {
-            "UNILEVER": 0,
-            "MILLER COORS": 5300,
-            "DANNON": 1000
+            "points": -4700,
+            "payer": "MILLER COORS"
+        },
+        {
+            "points": -100,
+            "payer": "DANNON"
         }
-      ```
+    ],
+    "status": "OK"
+}
+```
 
-## Finished!
+**Error Response**
 
+>**Condition** : If provided data amount is greater than the total points balance.
+>
+>**Code** : `400 BAD REQUEST`
+>
+>**Content example** :
 
+```json
+{
+    "message": "Not enough balance",
+    "success": false,
+    "error": "Logic error with the rewards spent",
+    "response": [],
+    "status": "BAD_REQUEST"
+}
+```
 
+## 3) Show payer balances
 
+Its shows the current balances of points of the payers
+
+>**URL** : `localhost:8080/get/balance`
+>
+>**Method** : `GET`
+>
+>**Auth required** : NO
+>
+>**Permissions required** : None
+
+**Success Response**
+
+>**Code** : `200 OK`
+>
+>**Content examples**
+
+```json
+{
+    "message": "Rewards spent!",
+    "success": true,
+    "error": "",
+    "response": {
+        "UNILEVER": 200,
+        "MILLER COORS": 10000,
+        "DANNON": 1100
+    },
+    "status": "OK"
+}
+```
