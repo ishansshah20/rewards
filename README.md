@@ -59,12 +59,47 @@ Step 4: Test project
 > 
 
 # Requests
-1) **Add new transaction:** Adds a transaction into the database.
 
-      Request Body:
-      ```
-      { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
-      ```
+## 1) Add new transaction: 
+
+Adds a new transaction into the database.
+
+**URL** : `localhost:8080/spend/rewards`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**Data constraints**
+
+Provide name of Payer, points we want to add for that payer and the timestamp.
+```
+{ 
+"payer": String, 
+"points": Integer, 
+"timestamp": "YYYY-MM-DDTHH:MM:SSZ" 
+}
+```
+
+**Data example** All fields must be sent.
+```
+{ 
+"payer": "DANNON",
+"points": 300,
+"timestamp": "2020-10-31T10:00:00Z"
+}
+```
+   
+## Success Response
+
+**Condition** : If everything is OK and an Account didn't exist for this User.
+
+**Code** : `201 CREATED`
+
+**Content example**
+      
       
       Response Body:
       ```
