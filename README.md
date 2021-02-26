@@ -169,8 +169,6 @@ Spend the points according to the rules
 
 **Data examples**
 
-Partial data is allowed.
-
 ```json
 {
     "points": 5000
@@ -226,10 +224,34 @@ Partial data is allowed.
 }
 ```
 
+## 3) Show payer balances
 
+Its shows the current balances of points of the payers
 
+>**URL** : `localhost:8080/get/balance`
+>
+>**Method** : `GET`
+>
+>**Auth required** : NO
+>
+>**Permissions required** : None
 
+**Success Response**
 
+>**Code** : `200 OK`
+>
+>**Content examples**
 
-
-
+```json
+{
+    "message": "Rewards spent!",
+    "success": true,
+    "error": "",
+    "response": {
+        "UNILEVER": 200,
+        "MILLER COORS": 10000,
+        "DANNON": 1100
+    },
+    "status": "OK"
+}
+```
