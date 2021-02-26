@@ -73,7 +73,18 @@ Step 4: Test project
 
       Request Body:
       ```
-        { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
+      { "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
+      ```
+      
+      Response Body:
+      ```
+       {
+          "message": "Transaction Saved!",
+          "success": true,
+          "error": "",
+          "response": [],
+          "status": "OK"
+      }
       ```
 
 2) **spend/rewards request:** This will deduct 5000 points.
@@ -85,10 +96,21 @@ Step 4: Test project
 
       Response Body:
       ```
-        {
-            "UNILEVER": -200,
-            "MILLER COORS": -4700,
-            "DANNON": -100
+       {
+          "message": "Rewards spent!",
+          "success": true,
+          "error": "",
+          "response": [
+              {
+                  "points": 0,
+                  "payer": "UNILEVER"
+              },
+              {
+                  "points": -300,
+                  "payer": "DANNON"
+              }
+          ],
+          "status": "OK"
         }
       ```
 
@@ -97,9 +119,15 @@ Step 4: Test project
       Response Body:
       ```
         {
-            "UNILEVER": 0,
-            "MILLER COORS": 5300,
-            "DANNON": 1000
+          "message": "Rewards spent!",
+          "success": true,
+          "error": "",
+          "response": {
+              "UNILEVER": 200,
+              "MILLER COORS": 10000,
+              "DANNON": 800
+          },
+          "status": "OK"
         }
       ```
 
