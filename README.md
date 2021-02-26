@@ -58,7 +58,7 @@ Step 4: Test project
 > * Open postman and import Fetch Rewards.postman_collection from your project folder. 
 > 
 
-# Requests
+## Requests
 
 ## 1) Add new transaction: 
 
