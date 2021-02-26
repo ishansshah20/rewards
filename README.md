@@ -64,17 +64,18 @@ Step 4: Test project
 
 Adds a new transaction into the database.
 
-**URL** : `localhost:8080/spend/rewards`
+>**URL** : `localhost:8080/spend/rewards`
+>
+>**Method** : `POST`
+>
+>**Auth required** : NO
+>
+>**Permissions required** : None
+>
+>**Data constraints**
 
-**Method** : `POST`
+>Provide name of Payer, points we want to add for that payer and the timestamp.
 
-**Auth required** : NO
-
-**Permissions required** : None
-
-**Data constraints**
-
-Provide name of Payer, points we want to add for that payer and the timestamp.
 ```json
 { 
 "payer": String, 
@@ -83,7 +84,8 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 }
 ```
 
-**Data example** All fields must be sent.
+>**Data example** All fields must be sent.
+
 ```json
 { 
 "payer": "DANNON",
@@ -94,11 +96,12 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
    
 **Success Response**
 
-**Condition** : If transaction is added and an transaction didn't exist for this User.
+>**Condition** : If transaction is added and an transaction didn't exist for this User.
+>
+>**Code** : `201 CREATED`
+>
+>**Content example**
 
-**Code** : `201 CREATED`
-
-**Content example**
 ```json
  {
 "message": "Transaction Saved!",
@@ -115,57 +118,90 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 ],
 "status": "CREATED"
 }
-      ```
+```
 
-2) **spend/rewards request:** This will deduct 5000 points.
+## 2) Spend the points
 
-      Request Body:
-      ```
-        { "points": 5000 }
-      ```
+Spend the points according to the rules
 
-      Response Body:
-      ```
-      {
-          "message": "Rewards spent!",
-          "success": true,
-          "error": "",
-          "response": [
-              {
-                  "points": -200,
-                  "payer": "UNILEVER"
-              },
-              {
-                  "points": -4700,
-                  "payer": "MILLER COORS"
-              },
-              {
-                  "points": -100,
-                  "payer": "DANNON"
-              }
-          ],
-          "status": "OK"
-      }
-      ```
+>**URL** : `localhost:8080/spend/rewards`
+>
+**Method** : `POST`
+>
+**Auth required** : NO
+>
+**Permissions required** : None
+>
+**Data constraints**
+>
+```json
+{
+    "points": "[points to spend]",
+}
+```
 
-3) **get/balances request:** It will show payers and their balances.
+**Data examples**
+>
+Partial data is allowed.
 
-      Response Body:
-      ```
+```json
+{
+    "points": 5000
+}
+```
+
+>**Success Responses**
+>
+>**Condition** : Data provided is valid and User is Authenticated.
+>
+>**Code** : `200 OK`
+>
+>**Content example** : Response will reflect back the information on the points spent from payers. 
+
+```json
+{
+    "message": "Rewards spent!",
+    "success": true,
+    "error": "",
+    "response": [
         {
-          "message": "Rewards spent!",
-          "success": true,
-          "error": "",
-          "response": {
-              "UNILEVER": 200,
-              "MILLER COORS": 10000,
-              "DANNON": 800
-          },
-          "status": "OK"
+            "points": -200,
+            "payer": "UNILEVER"
+        },
+        {
+            "points": -4700,
+            "payer": "MILLER COORS"
+        },
+        {
+            "points": -100,
+            "payer": "DANNON"
         }
-      ```
+    ],
+    "status": "OK"
+}
+```
 
-## Finished!
+**Error Response
+
+>**Condition** : If provided data amount is greater than the total points balance.
+>
+>**Code** : `400 BAD REQUEST`
+>
+>**Content example** :
+
+```json
+{
+    "message": "Not enough balance",
+    "success": false,
+    "error": "Logic error with the rewards spent",
+    "response": [],
+    "status": "BAD_REQUEST"
+}
+```
+
+
+
+
 
 
 
