@@ -75,7 +75,7 @@ Adds a new transaction into the database.
 **Data constraints**
 
 Provide name of Payer, points we want to add for that payer and the timestamp.
-```
+```json
 { 
 "payer": String, 
 "points": Integer, 
@@ -84,7 +84,7 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 ```
 
 **Data example** All fields must be sent.
-```
+```json
 { 
 "payer": "DANNON",
 "points": 300,
@@ -92,24 +92,29 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 }
 ```
    
-## Success Response
+**Success Response**
 
-**Condition** : If everything is OK and an Account didn't exist for this User.
+**Condition** : If transaction is added and an transaction didn't exist for this User.
 
 **Code** : `201 CREATED`
 
 **Content example**
-      
-      
-      Response Body:
-      ```
-       {
-          "message": "Transaction Saved!",
-          "success": true,
-          "error": "",
-          "response": [],
-          "status": "OK"
-      }
+```json
+ {
+"message": "Transaction Saved!",
+"success": true,
+"error": "",
+"response": [
+  {
+      "tid": "27a1141e-b8c1-4e0f-aba8-8ff1935c604a",
+      "payer": "MILLER COORS",
+      "points": 10000,
+      "timestamp": "2020-11-01T14:00:00.000+00:00",
+      "processed": false
+  }
+],
+"status": "CREATED"
+}
       ```
 
 2) **spend/rewards request:** This will deduct 5000 points.
