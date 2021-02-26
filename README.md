@@ -158,7 +158,7 @@ Spend the points according to the rules
 >
 >**Permissions required** : None
 
-**Data constraints**
+**Data constraints:**
 
 ```json
 {
@@ -166,7 +166,7 @@ Spend the points according to the rules
 }
 ```
 
-**Data examples**
+**Data examples:**
 
 ```json
 {
@@ -179,8 +179,9 @@ Spend the points according to the rules
 >**Condition** : Data provided is valid and User is Authenticated.
 >
 >**Code** : `200 OK`
->
->**Content example** : Response will reflect back the information on the points spent from payers. 
+
+**Content example:** 
+Response will reflect back the information on the points spent from payers. 
 
 ```json
 {
@@ -210,8 +211,8 @@ Spend the points according to the rules
 >**Condition** : If provided data amount is greater than the total points balance.
 >
 >**Code** : `400 BAD REQUEST`
->
->**Content example** :
+
+**Content example:** 
 
 ```json
 {
@@ -235,11 +236,11 @@ Its shows the current balances of points of the payers
 >
 >**Permissions required** : None
 
-**Success Response**
+**Success Response:**
 
 >**Code** : `200 OK`
->
->**Content examples**
+
+**Content examples:**
 
 ```json
 {
