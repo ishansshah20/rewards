@@ -79,9 +79,9 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 
 ```json
 { 
-"payer": String, 
-"points": Integer, 
-"timestamp": "YYYY-MM-DDTHH:MM:SSZ" 
+"payer": ["Name of the payer"], 
+"points": ["Points to add"], 
+"timestamp": ["Time stamp in format YYYY-MM-DDTHH:MM:SSZ"] 
 }
 ```
 
