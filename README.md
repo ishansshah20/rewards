@@ -82,7 +82,9 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 }
 ```
 
-**Data example** All fields must be sent.
+**Data example** \
+
+All fields must be sent.
 
 ```json
 { 
