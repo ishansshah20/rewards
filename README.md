@@ -121,6 +121,32 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
 }
 ```
 
+**Error Response**
+
+>**Condition** : If transaction is not saved internally
+>
+>**Code** : `400 BAD REQUEST`
+>
+>**Content example** :
+
+```json
+{
+    "message": "Error saving the transaction",
+    "success": false,
+    "error": "Internal error",
+    "response": [
+       {
+         "tid": "27a1141e-b8c1-4e0f-aba8-8ff1935c604a",
+         "payer": "MILLER COORS",
+         "points": 10000,
+         "timestamp": "2020-11-01T14:00:00.000+00:00",
+         "processed": false
+       }
+   ],
+    "status": "BAD_REQUEST"
+}
+```
+
 ## 2) Spend the points
 
 Spend the points according to the rules
