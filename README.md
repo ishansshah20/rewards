@@ -96,7 +96,7 @@ Provide name of Payer, points we want to add for that payer and the timestamp.
    
 **Success Response**
 
->**Condition** : If transaction is added and an transaction didn't exist for this User.
+>**Condition** : If transaction is added successfully.
 >
 >**Code** : `201 CREATED`
 >
@@ -217,7 +217,7 @@ Spend the points according to the rules
 {
     "message": "Not enough balance",
     "success": false,
-    "error": "Logic error with the rewards spent",
+    "error": "Amount passed is greater than the total amount",
     "response": [],
     "status": "BAD_REQUEST"
 }
