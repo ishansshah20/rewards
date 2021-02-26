@@ -72,9 +72,10 @@ Adds a new transaction into the database.
 >
 >**Permissions required** : None
 >
->**Data constraints**
 
->Provide name of Payer, points we want to add for that payer and the timestamp.
+**Data constraints**
+
+Provide name of Payer, points we want to add for that payer and the timestamp.
 
 ```json
 { 
@@ -84,7 +85,7 @@ Adds a new transaction into the database.
 }
 ```
 
->**Data example** All fields must be sent.
+**Data example** All fields must be sent.
 
 ```json
 { 
