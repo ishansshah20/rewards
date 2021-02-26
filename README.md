@@ -15,47 +15,45 @@ There are two rules for determining what points to "spend" first:
 
 ## Technologies Used
 
-> **Programming Language:** [Java](https://en.wikipedia.org/wiki/Java_(programming_language))
->
-> **Framework:** [Spring Boot](https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm)
->
-> **Database:** [H2](https://en.wikipedia.org/wiki/H2_(DBMS))
->
-> Here I have used H2 database because using a durable data store was not a requirement. So I am storing transactions in memory using H2.
->
-> **Tools:** IntelliJ, Postman
+**Programming Language:** [Java](https://en.wikipedia.org/wiki/Java_(programming_language))
+
+**Framework:** [Spring Boot](https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm)
+
+**Database:** [H2](https://en.wikipedia.org/wiki/H2_(DBMS))
+
+Here I have used H2 database because using a durable data store was not a requirement. So I am storing transactions in memory using H2.
+
+**Tools:** IntelliJ, Postman
 
 ## Links to download the Tools
 
-> [Java](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
->
-> [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows)
->
-> [Postman](https://www.postman.com/downloads/)
+[Java](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+
+[IntelliJ](https://www.jetbrains.com/idea/download/#section=windows)
+
+[Postman](https://www.postman.com/downloads/)
 
 ## How to run the project
 
 Step 1: Setting up the tools
-> * Download Java, IntelliJ and Postman. Links are given above.
->
-> * [Set up java](https://www.youtube.com/watch?v=1ZbHHLobt8A) in local machine. [Set up java in IntelliJ](https://www.youtube.com/watch?v=L7IZ6Ckujbw).
-> 
+* Download Java, IntelliJ and Postman. Links are given above.
+
+* [Set up java](https://www.youtube.com/watch?v=1ZbHHLobt8A) in local machine. [Set up java in IntelliJ](https://www.youtube.com/watch?v=L7IZ6Ckujbw). 
 
 Step 2: Setting up the project
-> * Using "-git clone" clone the project into your local machine.
->
-> * Open IntelliJ. On top click on File->Open. Select the pom.xml in the project folder and select add as project. This will add project into your IntelliJ IDE.
+* Using "-git clone" clone the project into your local machine.
+
+* Open IntelliJ. On top click on File->Open. Select the pom.xml in the project folder and select add as project. This will add project into your IntelliJ IDE.
 For detailed tutorial [click here](https://vaadin.com/learn/tutorials/modern-web-apps-with-spring-boot-and-vaadin/importing-running-and-debugging-a-java-maven-project-in-intellij-idea)
-> 
-> * Run the project. 
+ 
+* Run the project. 
 
 Note: Generally the project starts at localhost:8080  but in case it does not, go to your console and see last second line it will show the port at which your porject is running.
 
 Step 3: Testing the project
-> * Now to check our end points(APIs/Services) we would need a postman. Its a tool that will simulate various types of request sent to our webservice. For more details about postman [click here](https://www.postman.com/api-platform/).
->
-> * Open postman and import Fetch Rewards.postman_collection from your project folder. 
-> 
+* Now to check our end points(APIs/Services) we would need a postman. Its a tool that will simulate various types of request sent to our webservice. For more details about postman [click here](https://www.postman.com/api-platform/).
+
+* Open postman and import Fetch Rewards.postman_collection from your project folder.  
 
 ## Requests
 
