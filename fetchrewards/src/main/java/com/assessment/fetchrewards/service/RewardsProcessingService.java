@@ -1,10 +1,7 @@
 package com.assessment.fetchrewards.service;
 
+import com.assessment.fetchrewards.dto.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.assessment.fetchrewards.dto.PayerBalancesResponseDTO;
-import com.assessment.fetchrewards.dto.PointsSpendDTO;
-import com.assessment.fetchrewards.dto.SpentPointsDTO;
-import com.assessment.fetchrewards.dto.SpentPointsResponseDTO;
 import com.assessment.fetchrewards.model.PayerBalance;
 import com.assessment.fetchrewards.model.Transaction;
 import com.assessment.fetchrewards.repository.PayerBalanceRepository;
@@ -27,56 +24,60 @@ public class RewardsProcessingService {
     @Autowired
     PayerBalanceRepository payerBalanceRepository;
 
-    public SpentPointsResponseDTO addTransactionService(Transaction transaction){
-       try {
-           transactionRepository.save(transaction);
+    public AddTransactionResponseDTO addTransactionService(Transaction transaction){
+        try {
+            transactionRepository.save(transaction);
 
-           //Update payer Balance
-           Optional<PayerBalance> optionalPayerBalance = payerBalanceRepository.findByName(transaction.getPayer());
-           if (optionalPayerBalance.isPresent()) {
-               PayerBalance payerBalance = optionalPayerBalance.get();
-               long totalBalance = payerBalance.getBalance() + transaction.getPoints();
+            //Update payer Balance
+            Optional<PayerBalance> optionalPayerBalance = payerBalanceRepository.findByName(transaction.getPayer());
+            if (optionalPayerBalance.isPresent()) {
+                PayerBalance payerBalance = optionalPayerBalance.get();
+                long totalBalance = payerBalance.getBalance() + transaction.getPoints();
 
-               if (totalBalance > 0){
-                   payerBalance.setBalance(payerBalance.getBalance() + transaction.getPoints());
-               }
-               else{
-                   payerBalance.setBalance(0);
-               }
-               payerBalanceRepository.save(payerBalance);
+                if (totalBalance > 0){
+                    payerBalance.setBalance(payerBalance.getBalance() + transaction.getPoints());
+                }
+                else{
+                    payerBalance.setBalance(0);
+                }
+                payerBalanceRepository.save(payerBalance);
 
-           } else {
-               PayerBalance payerBalance = new PayerBalance();
-               payerBalance.setName(transaction.getPayer());
+            } else {
+                PayerBalance payerBalance = new PayerBalance();
+                payerBalance.setName(transaction.getPayer());
 
-               long points = transaction.getPoints();
-               if (points > 0){
-                   payerBalance.setBalance(points);
-               }
-               else{
-                   payerBalance.setBalance(0);
-               }
-               payerBalanceRepository.save(payerBalance);
-           }
+                long points = transaction.getPoints();
+                if (points > 0){
+                    payerBalance.setBalance(points);
+                }
+                else{
+                    payerBalance.setBalance(0);
+                }
+                payerBalanceRepository.save(payerBalance);
+            }
 
-           SpentPointsResponseDTO responseMessage = new SpentPointsResponseDTO();
-           responseMessage.setSuccess(true);
-           responseMessage.setMessage("Transaction Saved!");
-           responseMessage.setError("");
-           responseMessage.setStatus(HttpStatus.OK);
-           responseMessage.setResponse(new ArrayList());
-           return responseMessage;
+            List<Transaction> response = new ArrayList<>();
+            response.add(transaction);
+            AddTransactionResponseDTO addTransactionResponseDTO = new AddTransactionResponseDTO();
+            addTransactionResponseDTO.setSuccess(true);
+            addTransactionResponseDTO.setMessage("Transaction Saved!");
+            addTransactionResponseDTO.setError("");
+            addTransactionResponseDTO.setStatus(HttpStatus.CREATED);
+            addTransactionResponseDTO.setResponse(response);
+            return addTransactionResponseDTO;
 
-       }catch(Exception e){
-           log.error("Error saving the transaction",e);
-           SpentPointsResponseDTO responseMessage = new SpentPointsResponseDTO();
-           responseMessage.setSuccess(false);
-           responseMessage.setMessage("Error saving the transaction!");
-           responseMessage.setError(e.getMessage());
-           responseMessage.setStatus(HttpStatus.BAD_REQUEST);
-           responseMessage.setResponse(new ArrayList());
-           return responseMessage;
-       }
+        }catch(Exception e){
+            log.error("Error saving the transaction",e);
+            List<Transaction> response = new ArrayList<>();
+            response.add(transaction);
+            AddTransactionResponseDTO addTransactionResponseDTO = new AddTransactionResponseDTO();
+            addTransactionResponseDTO.setSuccess(false);
+            addTransactionResponseDTO.setMessage("Error saving the transaction!");
+            addTransactionResponseDTO.setError(e.getMessage());
+            addTransactionResponseDTO.setStatus(HttpStatus.BAD_REQUEST);
+            addTransactionResponseDTO.setResponse(new ArrayList<Transaction>(response));
+            return addTransactionResponseDTO;
+        }
     }
 
     public SpentPointsResponseDTO spendRewardsService(PointsSpendDTO pointsSpendDTO) {

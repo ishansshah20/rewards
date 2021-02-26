@@ -1,5 +1,6 @@
 package com.assessment.fetchrewards.controller;
 
+import com.assessment.fetchrewards.dto.AddTransactionResponseDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.assessment.fetchrewards.dto.PayerBalancesResponseDTO;
 import com.assessment.fetchrewards.dto.SpentPointsResponseDTO;
@@ -25,12 +26,12 @@ public class RewardsProcessingController {
 
     @PostMapping("/add/transaction")
     public ResponseEntity addTransaction(@RequestBody Transaction transaction){
-        SpentPointsResponseDTO spentPointsResponseDTO = rewardsProcessingService.addTransactionService(transaction);
-        if (!spentPointsResponseDTO.isSuccess()){
-            return new ResponseEntity(spentPointsResponseDTO, HttpStatus.BAD_REQUEST);
+        AddTransactionResponseDTO addTransactionResponseDTO = rewardsProcessingService.addTransactionService(transaction);
+        if (!addTransactionResponseDTO.isSuccess()){
+            return new ResponseEntity(addTransactionResponseDTO, HttpStatus.BAD_REQUEST);
         }
         else{
-            return new ResponseEntity(spentPointsResponseDTO, HttpStatus.OK);
+            return new ResponseEntity(addTransactionResponseDTO, HttpStatus.CREATED);
         }
     }
 
