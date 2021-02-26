@@ -125,8 +125,8 @@ All fields must be sent.
 >**Condition** : If transaction is not saved internally
 >
 >**Code** : `400 BAD REQUEST`
->
->**Content example** :
+
+**Content example** :
 
 ```json
 {
