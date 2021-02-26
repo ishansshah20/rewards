@@ -1,4 +1,4 @@
-# Fetch Rewards Assessment.
+# Fetch Rewards.
 
 ## About
 
