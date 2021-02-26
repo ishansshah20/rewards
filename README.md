@@ -126,14 +126,14 @@ Spend the points according to the rules
 
 >**URL** : `localhost:8080/spend/rewards`
 >
-**Method** : `POST`
+>**Method** : `POST`
 >
-**Auth required** : NO
+>**Auth required** : NO
 >
-**Permissions required** : None
->
+>**Permissions required** : None
+
 **Data constraints**
->
+
 ```json
 {
     "points": "[points to spend]",
@@ -141,7 +141,7 @@ Spend the points according to the rules
 ```
 
 **Data examples**
->
+
 Partial data is allowed.
 
 ```json
@@ -150,7 +150,7 @@ Partial data is allowed.
 }
 ```
 
->**Success Responses**
+**Success Responses**
 >
 >**Condition** : Data provided is valid and User is Authenticated.
 >
@@ -181,7 +181,7 @@ Partial data is allowed.
 }
 ```
 
-**Error Response
+**Error Response**
 
 >**Condition** : If provided data amount is greater than the total points balance.
 >
