@@ -24,6 +24,7 @@ public class RewardsProcessingService {
     @Autowired
     PayerBalanceRepository payerBalanceRepository;
 
+    //Service to add transactions
     public AddTransactionResponseDTO addTransactionService(Transaction transaction){
         try {
             transactionRepository.save(transaction);
@@ -56,6 +57,7 @@ public class RewardsProcessingService {
                 payerBalanceRepository.save(payerBalance);
             }
 
+            // Create success response
             List<Transaction> response = new ArrayList<>();
             response.add(transaction);
             AddTransactionResponseDTO addTransactionResponseDTO = new AddTransactionResponseDTO();
@@ -67,6 +69,8 @@ public class RewardsProcessingService {
             return addTransactionResponseDTO;
 
         }catch(Exception e){
+
+            // Create error response
             log.error("Error saving the transaction",e);
             List<Transaction> response = new ArrayList<>();
             response.add(transaction);
@@ -80,16 +84,15 @@ public class RewardsProcessingService {
         }
     }
 
+    //Service to spend given points
     public SpentPointsResponseDTO spendRewardsService(PointsSpendDTO pointsSpendDTO) {
-        HashMap<String, Long> balanceMap = new HashMap<String, Long>();
-        HashMap<String, Long> resultMap = new HashMap<String, Long>();
-        List<Object> response = new ArrayList();
-
-        // Getting those transactions only that is still in need of processing
         try {
+            HashMap<String, Long> balanceMap = new HashMap<String, Long>();
+            HashMap<String, Long> resultMap = new HashMap<String, Long>();
+            List<Object> response = new ArrayList();
+
+            // Get all transactions that are not processed
             Optional<List<Transaction>> optionalTransactions = transactionRepository.findAllNotProcessed();
-
-
             Iterable<PayerBalance> iterablePayerBalance = payerBalanceRepository.findAll();
             Iterator<PayerBalance> payerBalanceIterator = iterablePayerBalance.iterator();
             List<Transaction> transactions = new ArrayList<Transaction>();
@@ -107,14 +110,14 @@ public class RewardsProcessingService {
             int spendingPoints = pointsSpendDTO.getPoints();
             long totalPoints = 0;
 
-            // Add payer data into a hashmap and calculating total counts. It removes the bottle next to constantly read from database
+            // Add payer data into a hashmap. It removes the bottleneck to constantly read from database
             while (payerBalanceIterator.hasNext()) {
                 PayerBalance payerBalance = payerBalanceIterator.next();
                 balanceMap.put(payerBalance.getName(), payerBalance.getBalance());
                 totalPoints += payerBalance.getBalance();
             }
 
-            // Main Logic
+            // Main points spending Logic
             if (totalPoints >= spendingPoints) {
                 long remainingPoints = spendingPoints;
                 for (Transaction t : transactions) {
@@ -148,6 +151,7 @@ public class RewardsProcessingService {
                     response.add(spentPoints);
                 }
 
+                // Create sucesss response
                 SpentPointsResponseDTO responseMessage = new SpentPointsResponseDTO();
                 responseMessage.setSuccess(true);
                 responseMessage.setMessage("Rewards spent!");
@@ -157,6 +161,7 @@ public class RewardsProcessingService {
                 return responseMessage;
 
             } else {
+                // Create error response
                 SpentPointsResponseDTO responseMessage = new SpentPointsResponseDTO();
                 responseMessage.setSuccess(false);
                 responseMessage.setMessage("Not enough balance");
@@ -167,6 +172,7 @@ public class RewardsProcessingService {
             }
 
         }catch(Exception e){
+            // Create error response
             log.error("Error Spending Points", e);
             SpentPointsResponseDTO responseMessage = new SpentPointsResponseDTO();
             responseMessage.setSuccess(false);
@@ -178,17 +184,20 @@ public class RewardsProcessingService {
         }
     }
 
+    //Service to get payer balances
     public PayerBalancesResponseDTO getPayerBalance() throws JsonProcessingException {
         try {
             HashMap<String, Long> balanceMap = new HashMap<String, Long>();
             Iterator<PayerBalance> payerBalanceIterator = payerBalanceRepository.findAll().iterator();
             List<Object> response = new ArrayList();
 
+            // To cut the cost of reading the database
             while (payerBalanceIterator.hasNext()) {
-                // To cut the cost of pinging the database
                 PayerBalance payerBalance = payerBalanceIterator.next();
                 balanceMap.put(payerBalance.getName(), payerBalance.getBalance());
             }
+
+            // Create success response
             PayerBalancesResponseDTO responseMessage = new PayerBalancesResponseDTO();
             responseMessage.setSuccess(true);
             responseMessage.setMessage("Rewards spent!");
@@ -199,6 +208,7 @@ public class RewardsProcessingService {
 
 
         }catch(Exception e){
+            // Create error response
             log.error("Error getting balance",e);
             PayerBalancesResponseDTO responseMessage = new PayerBalancesResponseDTO();
             responseMessage.setSuccess(false);
